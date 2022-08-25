@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:deliveryapp/resi.dart';
 import 'package:deliveryapp/tracking.dart';
+import 'package:deliveryapp/model/data.dart';
 
 class MyHomePage extends StatefulWidget {
   final String title;
@@ -15,6 +16,9 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePage extends State<MyHomePage> {
   final _selectedIndex = 0;
+  var dataOnGoingList = dataList
+      .where((element) => element.status != 'Delivery Complete')
+      .toList();
 
   @override
   Widget build(BuildContext context) {
@@ -178,156 +182,95 @@ class _MyHomePage extends State<MyHomePage> {
                         style: Theme.of(context).textTheme.headline2,
                       ),
                     ),
-                    Container(
-                        decoration: const BoxDecoration(
-                            color: Color.fromARGB(255, 52, 58, 67),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16))),
-                        padding: const EdgeInsets.all(16),
-                        margin: const EdgeInsets.only(top: 16),
-                        alignment: Alignment.center,
-                        child: InkWell(
-                          onTap: () => Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return const TrackingPage(title: 'Tracking Page');
-                          })),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    FontAwesomeIcons.box,
-                                    size: 56,
-                                    color: Color.fromARGB(255, 233, 72, 69),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    child: Column(
-                                      children: const [
-                                        Text(
-                                          'JX32152435',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600,
-                                          ),
+                    ListView.builder(
+                        padding: const EdgeInsets.all(0),
+                        itemCount: dataOnGoingList.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          final Data data = dataOnGoingList[index];
+                          return Container(
+                              decoration: const BoxDecoration(
+                                  color: Color.fromARGB(255, 52, 58, 67),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16))),
+                              padding: const EdgeInsets.all(16),
+                              margin: const EdgeInsets.only(top: 16),
+                              alignment: Alignment.center,
+                              child: InkWell(
+                                onTap: () => Navigator.push(context,
+                                    MaterialPageRoute(builder: (context) {
+                                  return const TrackingPage(
+                                      title: 'Tracking Page');
+                                })),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        const Icon(
+                                          FontAwesomeIcons.box,
+                                          size: 56,
+                                          color:
+                                              Color.fromARGB(255, 233, 72, 69),
                                         ),
-                                        Text(
-                                          'Jakarta, Indonesia',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w300,
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                data.id,
+                                                textAlign: TextAlign.left,
+                                                style: const TextStyle(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              Text(
+                                                data.destination,
+                                                textAlign: TextAlign.left,
+                                                style: const TextStyle(
+                                                  fontSize: 10,
+                                                  fontWeight: FontWeight.w300,
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color.fromARGB(255, 206, 52, 49),
-                                      Color.fromARGB(255, 233, 72, 69),
-                                    ],
-                                    begin: Alignment.bottomCenter,
-                                    end: Alignment.topCenter,
-                                  ),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: const Text(
-                                  'Transit',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )),
-                    Container(
-                        decoration: const BoxDecoration(
-                            color: Color.fromARGB(255, 52, 58, 67),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16))),
-                        padding: const EdgeInsets.all(16),
-                        margin: const EdgeInsets.only(top: 16),
-                        alignment: Alignment.center,
-                        child: InkWell(
-                          onTap: () => Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return const TrackingPage(title: 'Tracking Page');
-                          })),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    FontAwesomeIcons.box,
-                                    size: 56,
-                                    color: Color.fromARGB(255, 233, 72, 69),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    child: Column(
-                                      children: const [
-                                        Text(
-                                          'JX32152435',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
+                                    Container(
+                                      decoration: const BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(8)),
+                                        gradient: LinearGradient(
+                                          colors: [
+                                            Color.fromARGB(255, 206, 52, 49),
+                                            Color.fromARGB(255, 233, 72, 69),
+                                          ],
+                                          begin: Alignment.bottomCenter,
+                                          end: Alignment.topCenter,
+                                        ),
+                                      ),
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 16, vertical: 8),
+                                      child: Text(
+                                        data.status,
+                                        style: const TextStyle(
                                             fontSize: 14,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Jakarta, Indonesia',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                        ),
-                                      ],
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              ),
-                              Container(
-                                decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
-                                  gradient: LinearGradient(
-                                    colors: [
-                                      Color.fromARGB(255, 206, 52, 49),
-                                      Color.fromARGB(255, 233, 72, 69),
-                                    ],
-                                    begin: Alignment.bottomCenter,
-                                    end: Alignment.topCenter,
-                                  ),
+                                  ],
                                 ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: const Text(
-                                  'Transit',
-                                  style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold),
-                                ),
-                              ),
-                            ],
-                          ),
-                        )),
+                              ));
+                        })
                   ],
                 ),
               ),
@@ -368,71 +311,92 @@ class _MyHomePage extends State<MyHomePage> {
                         ],
                       ),
                     ),
-                    Container(
-                        decoration: const BoxDecoration(
-                            color: Color.fromARGB(255, 52, 58, 67),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(16))),
-                        padding: const EdgeInsets.all(16),
-                        margin: const EdgeInsets.only(top: 16),
-                        alignment: Alignment.center,
-                        child: InkWell(
-                          onTap: () => Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                            return const TrackingPage(title: 'Tracking Page');
-                          })),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  const Icon(
-                                    FontAwesomeIcons.box,
-                                    size: 56,
-                                    color: Color.fromARGB(255, 193, 193, 193),
-                                  ),
-                                  Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 16),
-                                    child: Column(
-                                      children: const [
-                                        Text(
-                                          'JX32152435',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                        Text(
-                                          'Jakarta, Indonesia',
-                                          textAlign: TextAlign.left,
-                                          style: TextStyle(
-                                            fontSize: 10,
-                                            fontWeight: FontWeight.w300,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Container(
+                    Column(
+                      children: [
+                        ListView.builder(
+                            padding: const EdgeInsets.all(0),
+                            itemCount: 1,
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            itemBuilder: (context, index) {
+                              final Data data = dataList[index];
+                              return Container(
                                 decoration: const BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
+                                    color: Color.fromARGB(255, 52, 58, 67),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(16))),
+                                padding: const EdgeInsets.all(16),
+                                margin: const EdgeInsets.only(top: 16),
+                                alignment: Alignment.center,
+                                child: InkWell(
+                                  onTap: () => Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return const TrackingPage(
+                                        title: 'Tracking Page');
+                                  })),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          const Icon(
+                                            FontAwesomeIcons.box,
+                                            size: 56,
+                                            color: Color.fromARGB(
+                                                255, 193, 193, 193),
+                                          ),
+                                          Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 16),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  data.id,
+                                                  textAlign: TextAlign.left,
+                                                  style: const TextStyle(
+                                                    fontSize: 14,
+                                                    fontWeight: FontWeight.w600,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  data.destination,
+                                                  textAlign: TextAlign.left,
+                                                  style: const TextStyle(
+                                                    fontSize: 10,
+                                                    fontWeight: FontWeight.w300,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Container(
+                                        decoration: const BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(8)),
+                                        ),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16, vertical: 8),
+                                        child: Text(
+                                          data.sent,
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .bodyText2,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16, vertical: 8),
-                                child: Text(
-                                  '24 Agt 2022',
-                                  style: Theme.of(context).textTheme.bodyText2,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )),
+                              );
+                            })
+                      ],
+                    ),
                   ],
                 ),
               ),
