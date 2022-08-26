@@ -200,8 +200,11 @@ class _MyHomePage extends State<MyHomePage> {
                               child: InkWell(
                                 onTap: () => Navigator.push(context,
                                     MaterialPageRoute(builder: (context) {
-                                  return const TrackingPage(
-                                      title: 'Tracking Page');
+                                  return TrackingPage(
+                                    id: data.id,
+                                    process: data.process,
+                                    position: data.position,
+                                  );
                                 })),
                                 child: Row(
                                   mainAxisAlignment:
@@ -331,8 +334,11 @@ class _MyHomePage extends State<MyHomePage> {
                                 child: InkWell(
                                   onTap: () => Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return const TrackingPage(
-                                        title: 'Tracking Page');
+                                    return TrackingPage(
+                                      id: data.id,
+                                      process: data.process,
+                                      position: data.position,
+                                    );
                                   })),
                                   child: Row(
                                     mainAxisAlignment:

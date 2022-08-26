@@ -25,7 +25,8 @@ var dataList = [
     status: 'Transit',
     position: [
       ['Sent to destination city', 'Jakarta, Indonesia', '24 Agt 2022'],
-      ['Sent to destination city', 'Jakarta, Indonesia', '24 Agt 2022'],
+      ['Arrived in Indonesia', 'Jakarta, Indonesia', '20 Agt 2022'],
+      ['Accepted by Jx Express', 'Jakarta, Indonesia', '19 Agt 2022'],
     ],
   ),
   Data(

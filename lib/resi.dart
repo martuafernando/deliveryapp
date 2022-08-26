@@ -1,3 +1,4 @@
+import 'package:deliveryapp/model/data.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -40,70 +41,84 @@ class _ResiPage extends State<ResiPage> {
                       ),
                     ],
                   ),
-                  Container(
-                      decoration: const BoxDecoration(
-                          color: Color.fromARGB(255, 52, 58, 67),
-                          borderRadius: BorderRadius.all(Radius.circular(16))),
-                      padding: const EdgeInsets.all(16),
-                      margin: const EdgeInsets.only(top: 32),
-                      alignment: Alignment.center,
-                      child: InkWell(
-                        onTap: (() => Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                              return const TrackingPage(title: 'Tracking Page');
-                            }))),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Icon(
-                                  FontAwesomeIcons.box,
-                                  size: 56,
-                                  color: Color.fromARGB(255, 193, 193, 193),
-                                ),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16),
-                                  child: Column(
-                                    children: const [
-                                      Text(
-                                        'JX32152435',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                        ),
+                  ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: dataList.length,
+                      itemBuilder: (context, index) {
+                        final Data data = dataList[index];
+                        return Container(
+                            decoration: const BoxDecoration(
+                                color: Color.fromARGB(255, 52, 58, 67),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(16))),
+                            padding: const EdgeInsets.all(16),
+                            margin: const EdgeInsets.only(top: 16),
+                            alignment: Alignment.center,
+                            child: InkWell(
+                              onTap: (() => Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                    return TrackingPage(
+                                      id: data.id,
+                                      process: data.process,
+                                      position: data.position,
+                                    );
+                                  }))),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      const Icon(
+                                        FontAwesomeIcons.box,
+                                        size: 56,
+                                        color:
+                                            Color.fromARGB(255, 193, 193, 193),
                                       ),
-                                      Text(
-                                        'Jakarta, Indonesia',
-                                        textAlign: TextAlign.left,
-                                        style: TextStyle(
-                                          fontSize: 10,
-                                          fontWeight: FontWeight.w300,
+                                      Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 16),
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              data.id,
+                                              textAlign: TextAlign.left,
+                                              style: const TextStyle(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Text(
+                                              data.destination,
+                                              textAlign: TextAlign.left,
+                                              style: const TextStyle(
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w300,
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
                                   ),
-                                ),
-                              ],
-                            ),
-                            Container(
-                              decoration: const BoxDecoration(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(8)),
+                                  Container(
+                                    decoration: const BoxDecoration(
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(8)),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 16, vertical: 8),
+                                    child: Text(
+                                      data.sent,
+                                      style:
+                                          Theme.of(context).textTheme.bodyText2,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 16, vertical: 8),
-                              child: Text(
-                                '24 Agt 2022',
-                                style: Theme.of(context).textTheme.bodyText2,
-                              ),
-                            ),
-                          ],
-                        ),
-                      )),
+                            ));
+                      })
                 ],
               ),
             )),
