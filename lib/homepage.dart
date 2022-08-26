@@ -1,8 +1,11 @@
+import 'package:deliveryapp/notification.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:deliveryapp/resi.dart';
 import 'package:deliveryapp/tracking.dart';
+import 'package:deliveryapp/voucher.dart';
+import 'package:deliveryapp/comingSoon.dart';
 import 'package:deliveryapp/model/data.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -40,9 +43,12 @@ class _MyHomePage extends State<MyHomePage> {
                       style: Theme.of(context).textTheme.headline2,
                     ),
                     IconButton(
-                        // Use the FaIcon Widget + FontAwesomeIcons class for the IconData
-                        icon: const Icon(FontAwesomeIcons.bell),
-                        onPressed: () => print("Pressed"))
+                      icon: const Icon(FontAwesomeIcons.bell),
+                      onPressed: () => Navigator.push(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const NotificationPage();
+                      })),
+                    )
                   ],
                 ),
               )),
@@ -58,32 +64,38 @@ class _MyHomePage extends State<MyHomePage> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(1),
-                          margin: const EdgeInsets.only(bottom: 16),
-                          decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 84, 88, 91),
-                                  Color.fromARGB(255, 29, 33, 39),
-                                  Color.fromARGB(255, 84, 88, 91),
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16.0))),
+                        InkWell(
+                          onTap: () => Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return const ComingSoonPage(
+                              title: 'Send Item',
+                            );
+                          })),
                           child: Container(
+                            padding: const EdgeInsets.all(1),
+                            margin: const EdgeInsets.only(bottom: 16),
                             decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 52, 58, 67),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 84, 88, 91),
+                                    Color.fromARGB(255, 29, 33, 39),
+                                    Color.fromARGB(255, 84, 88, 91),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(16.0))),
-                            padding: const EdgeInsets.all(16.0),
-                            child: IconButton(
-                              iconSize: 28.0,
-                              icon: const FaIcon(FontAwesomeIcons.paperPlane),
-                              onPressed: () => print('kepencet'),
-                            ),
+                            child: Container(
+                                decoration: const BoxDecoration(
+                                    color: Color.fromARGB(255, 52, 58, 67),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(16.0))),
+                                padding: const EdgeInsets.all(24.0),
+                                child: const Icon(
+                                  FontAwesomeIcons.paperPlane,
+                                  size: 28,
+                                )),
                           ),
                         ),
                         Text(
@@ -95,31 +107,36 @@ class _MyHomePage extends State<MyHomePage> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(1),
-                          margin: const EdgeInsets.only(bottom: 16),
-                          decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 84, 88, 91),
-                                  Color.fromARGB(255, 29, 33, 39),
-                                  Color.fromARGB(255, 84, 88, 91),
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16.0))),
+                        InkWell(
+                          onTap: () => Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return const VoucherPage();
+                          })),
                           child: Container(
+                            padding: const EdgeInsets.all(1),
+                            margin: const EdgeInsets.only(bottom: 16),
                             decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 52, 58, 67),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 84, 88, 91),
+                                    Color.fromARGB(255, 29, 33, 39),
+                                    Color.fromARGB(255, 84, 88, 91),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(16.0))),
-                            padding: const EdgeInsets.all(16.0),
-                            child: IconButton(
-                              iconSize: 28.0,
-                              icon: const FaIcon(FontAwesomeIcons.receipt),
-                              onPressed: () => print('kepencet'),
+                            child: Container(
+                              decoration: const BoxDecoration(
+                                  color: Color.fromARGB(255, 52, 58, 67),
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(16.0))),
+                              padding: const EdgeInsets.all(24.0),
+                              child: const Icon(
+                                FontAwesomeIcons.receipt,
+                                size: 28,
+                              ),
                             ),
                           ),
                         ),
@@ -132,32 +149,34 @@ class _MyHomePage extends State<MyHomePage> {
                     Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(1),
-                          margin: const EdgeInsets.only(bottom: 16),
-                          decoration: const BoxDecoration(
-                              gradient: LinearGradient(
-                                colors: [
-                                  Color.fromARGB(255, 84, 88, 91),
-                                  Color.fromARGB(255, 29, 33, 39),
-                                  Color.fromARGB(255, 84, 88, 91),
-                                ],
-                                begin: Alignment.topLeft,
-                                end: Alignment.bottomRight,
-                              ),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(16.0))),
+                        InkWell(
+                          onTap: () => Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return const ComingSoonPage(title: 'Call Center');
+                          })),
                           child: Container(
+                            padding: const EdgeInsets.all(1),
+                            margin: const EdgeInsets.only(bottom: 16),
                             decoration: const BoxDecoration(
-                                color: Color.fromARGB(255, 52, 58, 67),
+                                gradient: LinearGradient(
+                                  colors: [
+                                    Color.fromARGB(255, 84, 88, 91),
+                                    Color.fromARGB(255, 29, 33, 39),
+                                    Color.fromARGB(255, 84, 88, 91),
+                                  ],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
+                                ),
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(16.0))),
-                            padding: const EdgeInsets.all(16.0),
-                            child: IconButton(
-                              iconSize: 28.0,
-                              icon: const FaIcon(FontAwesomeIcons.phone),
-                              onPressed: () => print('kepencet'),
-                            ),
+                            child: Container(
+                                decoration: const BoxDecoration(
+                                    color: Color.fromARGB(255, 52, 58, 67),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(16.0))),
+                                padding: const EdgeInsets.all(24.0),
+                                child: const Icon(FontAwesomeIcons.phone,
+                                    size: 28)),
                           ),
                         ),
                         Text(

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:deliveryapp/homepage.dart';
-import 'package:deliveryapp/tracking.dart';
 
 void main() => runApp(const MyApp());
 
