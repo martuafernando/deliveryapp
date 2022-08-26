@@ -7,40 +7,49 @@ class NotificationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-            child: Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Column(
-        children: [
-          Stack(
-            children: [
-              IconButton(
-                  icon: const Icon(FontAwesomeIcons.angleLeft),
-                  onPressed: () => Navigator.pop(context)),
-              Container(
-                margin: const EdgeInsets.only(top: 8),
-                alignment: Alignment.center,
-                child: Text(
-                  'Notification',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headline2,
+        body: Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Flexible(
+            child: Container(
+          constraints: const BoxConstraints(maxWidth: 768),
+          child: SafeArea(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Column(
+              children: [
+                Stack(
+                  children: [
+                    IconButton(
+                        icon: const Icon(FontAwesomeIcons.angleLeft),
+                        onPressed: () => Navigator.pop(context)),
+                    Container(
+                      margin: const EdgeInsets.only(top: 8),
+                      alignment: Alignment.center,
+                      child: Text(
+                        'Notification',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.headline2,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
-            ],
-          ),
-          Container(
-            margin: const EdgeInsets.only(top: 48),
-            child: Text(
-              "There's no notification right now",
-              textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyText1!
-                  .merge(TextStyle(color: Color.fromARGB(255, 134, 144, 160))),
+                Container(
+                  margin: const EdgeInsets.only(top: 48),
+                  child: Text(
+                    "There's no notification right now",
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyText1!.merge(
+                        const TextStyle(
+                            color: Color.fromARGB(255, 134, 144, 160))),
+                  ),
+                )
+              ],
             ),
-          )
-        ],
-      ),
-    )));
+          )),
+        ))
+      ],
+    ));
   }
 }
