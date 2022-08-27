@@ -30,7 +30,7 @@ var dataList = [
     ],
   ),
   Data(
-    id: 'JX32152433',
+    id: 'SX32152433',
     process: 0.69,
     destination: 'Semarang, Indonesia',
     sent: '24 Agt 2022',

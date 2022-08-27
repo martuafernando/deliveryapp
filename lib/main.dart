@@ -28,9 +28,7 @@ class MyApp extends StatelessWidget {
           bodyText2: TextStyle(fontSize: 10.0),
         ).apply(displayColor: Colors.white),
       ),
-      home: const MyHomePage(
-        title: appName,
-      ),
+      home: MyHomePage(),
     );
   }
 }

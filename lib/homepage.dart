@@ -8,16 +8,7 @@ import 'package:deliveryapp/voucher.dart';
 import 'package:deliveryapp/comingSoon.dart';
 import 'package:deliveryapp/model/data.dart';
 
-class MyHomePage extends StatefulWidget {
-  final String title;
-
-  const MyHomePage({super.key, required this.title});
-
-  @override
-  State<MyHomePage> createState() => _MyHomePage();
-}
-
-class _MyHomePage extends State<MyHomePage> {
+class MyHomePage extends StatelessWidget {
   final _selectedIndex = 0;
   var dataOnGoingList = dataList
       .where((element) => element.status != 'Delivery Complete')
@@ -59,10 +50,6 @@ class _MyHomePage extends State<MyHomePage> {
                       ],
                     ),
                   )),
-                  Container(
-                    margin: const EdgeInsets.only(top: 16.0),
-                    child: const MyCustomForm(),
-                  ),
                   Container(
                     margin: const EdgeInsets.only(top: 32.0),
                     child: Row(
@@ -235,7 +222,7 @@ class _MyHomePage extends State<MyHomePage> {
                                     })),
                                     child: Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceAround,
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
                                         Row(
                                           mainAxisAlignment:
@@ -375,7 +362,7 @@ class _MyHomePage extends State<MyHomePage> {
                                       })),
                                       child: Row(
                                         mainAxisAlignment:
-                                            MainAxisAlignment.spaceAround,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Row(
                                             mainAxisAlignment:
@@ -470,64 +457,6 @@ class _MyHomePage extends State<MyHomePage> {
               }))
             }
         },
-      ),
-    );
-  }
-}
-
-// Create a Form widget.
-class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({super.key});
-
-  @override
-  MyCustomFormState createState() {
-    return MyCustomFormState();
-  }
-}
-
-class MyCustomFormState extends State<MyCustomForm> {
-  final _formKey = GlobalKey<FormState>();
-
-  @override
-  Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Stack(
-        children: [
-          TextFormField(
-            decoration: InputDecoration(
-                border: const OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                ),
-                filled: true,
-                prefixIcon: const Icon(FontAwesomeIcons.truckFast, size: 18.0),
-                fillColor: const Color.fromARGB(255, 52, 58, 67),
-                hintText: 'Search Shipping Code',
-                hintStyle: Theme.of(context).textTheme.bodyText1),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter some text';
-              }
-              return null;
-            },
-          ),
-          Positioned.fill(
-              child: Align(
-            alignment: Alignment.topRight,
-            child: IconButton(
-              padding: EdgeInsets.all(16),
-              iconSize: 18.0,
-              icon: const Icon(FontAwesomeIcons.magnifyingGlass),
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Processing Data')),
-                  );
-                }
-              },
-            ),
-          ))
-        ],
       ),
     );
   }

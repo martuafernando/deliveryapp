@@ -4,9 +4,39 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:deliveryapp/tracking.dart';
 
-class ResiPage extends StatelessWidget {
-  final _selectedIndex = 1;
+class ResiPage extends StatefulWidget {
   const ResiPage({super.key});
+
+  @override
+  State<ResiPage> createState() => _ResiPage();
+}
+
+class _ResiPage extends State<ResiPage> {
+  final _selectedIndex = 1;
+
+  @override
+  List<Data> _foundId = [];
+  final _formKey = GlobalKey<FormState>();
+
+  initState() {
+    _foundId = dataList;
+    super.initState();
+  }
+
+  void runFilter(String enteredId) {
+    List<Data> results;
+    if (enteredId.isEmpty) {
+      results = dataList;
+    } else {
+      results = dataList
+          .where(
+              (data) => data.id.toLowerCase().contains(enteredId.toLowerCase()))
+          .toList();
+    }
+    setState(() {
+      _foundId = results;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,86 +70,136 @@ class ResiPage extends StatelessWidget {
                           ),
                         ],
                       ),
-                      ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: dataList.length,
-                          itemBuilder: (context, index) {
-                            final Data data = dataList[index];
-                            return Container(
-                                decoration: const BoxDecoration(
-                                    color: Color.fromARGB(255, 52, 58, 67),
+                      Container(
+                        margin: const EdgeInsets.only(top: 16.0),
+                        child: Stack(
+                          children: [
+                            TextFormField(
+                              onChanged: (value) => runFilter(value),
+                              decoration: InputDecoration(
+                                  border: const OutlineInputBorder(
                                     borderRadius:
-                                        BorderRadius.all(Radius.circular(16))),
-                                padding: const EdgeInsets.all(16),
-                                margin: const EdgeInsets.only(top: 16),
-                                alignment: Alignment.center,
-                                child: InkWell(
-                                  onTap: (() => Navigator.push(context,
-                                          MaterialPageRoute(builder: (context) {
-                                        return TrackingPage(
-                                          id: data.id,
-                                          process: data.process,
-                                          position: data.position,
-                                        );
-                                      }))),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          const Icon(
-                                            FontAwesomeIcons.box,
-                                            size: 56,
-                                            color: Color.fromARGB(
-                                                255, 193, 193, 193),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 16),
-                                            child: Column(
-                                              children: [
-                                                Text(
-                                                  data.id,
-                                                  textAlign: TextAlign.left,
-                                                  style: const TextStyle(
-                                                    fontSize: 14,
-                                                    fontWeight: FontWeight.w600,
-                                                  ),
-                                                ),
-                                                Text(
-                                                  data.destination,
-                                                  textAlign: TextAlign.left,
-                                                  style: const TextStyle(
-                                                    fontSize: 10,
-                                                    fontWeight: FontWeight.w300,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      Container(
-                                        decoration: const BoxDecoration(
-                                          borderRadius: BorderRadius.all(
-                                              Radius.circular(8)),
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                            horizontal: 16, vertical: 8),
-                                        child: Text(
-                                          data.sent,
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyText2,
-                                        ),
-                                      ),
-                                    ],
+                                        BorderRadius.all(Radius.circular(16.0)),
                                   ),
-                                ));
-                          })
+                                  filled: true,
+                                  prefixIcon: const Icon(
+                                      FontAwesomeIcons.truckFast,
+                                      size: 18.0),
+                                  fillColor:
+                                      const Color.fromARGB(255, 52, 58, 67),
+                                  hintText: 'Search Shipping Code',
+                                  hintStyle:
+                                      Theme.of(context).textTheme.bodyText1),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter some text';
+                                }
+                                return null;
+                              },
+                            ),
+                            const Positioned.fill(
+                                child: Align(
+                              alignment: Alignment.topRight,
+                              child: Padding(
+                                padding: EdgeInsets.all(20),
+                                child: Icon(
+                                  FontAwesomeIcons.magnifyingGlass,
+                                  size: 18,
+                                ),
+                              ),
+                            ))
+                          ],
+                        ),
+                      ),
+                      Container(
+                        margin: const EdgeInsets.only(top: 16),
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: _foundId.length,
+                            itemBuilder: (context, index) {
+                              final Data data = _foundId[index];
+                              return Container(
+                                  decoration: const BoxDecoration(
+                                      color: Color.fromARGB(255, 52, 58, 67),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(16))),
+                                  padding: const EdgeInsets.all(16),
+                                  margin: const EdgeInsets.only(top: 16),
+                                  alignment: Alignment.center,
+                                  child: InkWell(
+                                    onTap: (() => Navigator.push(context,
+                                            MaterialPageRoute(
+                                                builder: (context) {
+                                          return TrackingPage(
+                                            id: data.id,
+                                            process: data.process,
+                                            position: data.position,
+                                          );
+                                        }))),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            const Icon(
+                                              FontAwesomeIcons.box,
+                                              size: 56,
+                                              color: Color.fromARGB(
+                                                  255, 193, 193, 193),
+                                            ),
+                                            Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 16),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    data.id,
+                                                    textAlign: TextAlign.left,
+                                                    style: const TextStyle(
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                  Text(
+                                                    data.destination,
+                                                    textAlign: TextAlign.left,
+                                                    style: const TextStyle(
+                                                      fontSize: 10,
+                                                      fontWeight:
+                                                          FontWeight.w300,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        Container(
+                                          decoration: const BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(8)),
+                                          ),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 16, vertical: 8),
+                                          child: Text(
+                                            data.sent,
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .bodyText2,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ));
+                            }),
+                      )
                     ],
                   ),
                 )),
