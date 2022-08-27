@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class TrackingPage extends StatefulWidget {
+class TrackingPage extends StatelessWidget {
   final String id;
   final double process;
   final List<List<String>> position;
@@ -13,11 +13,6 @@ class TrackingPage extends StatefulWidget {
     required this.position,
   });
 
-  @override
-  State<TrackingPage> createState() => _TrackingPage();
-}
-
-class _TrackingPage extends State<TrackingPage> {
   // convert double to string percentage
   String doubleToString(double number) {
     number = number * 100;
@@ -73,7 +68,7 @@ class _TrackingPage extends State<TrackingPage> {
                                       color:
                                           Color.fromARGB(255, 152, 154, 158))),
                             ),
-                            Text(widget.id,
+                            Text(id,
                                 style: Theme.of(context).textTheme.headline2),
                           ],
                         ),
@@ -87,7 +82,7 @@ class _TrackingPage extends State<TrackingPage> {
                               width: 120,
                               height: 120,
                               child: CircularProgressIndicator(
-                                value: widget.process,
+                                value: process,
                                 valueColor: const AlwaysStoppedAnimation<Color>(
                                   Color.fromARGB(255, 233, 72, 69),
                                 ),
@@ -100,7 +95,7 @@ class _TrackingPage extends State<TrackingPage> {
                             Column(
                               children: [
                                 Text(
-                                  doubleToString(widget.process),
+                                  doubleToString(process),
                                   textAlign: TextAlign.center,
                                   style: const TextStyle(
                                     fontSize: 14,
@@ -126,10 +121,9 @@ class _TrackingPage extends State<TrackingPage> {
                             children: [
                               ListView.builder(
                                 shrinkWrap: true,
-                                itemCount: widget.position.length,
+                                itemCount: position.length,
                                 itemBuilder: (context, index) {
-                                  final List<String> data =
-                                      widget.position[index];
+                                  final List<String> data = position[index];
                                   return Container(
                                     margin:
                                         const EdgeInsets.symmetric(vertical: 8),

@@ -4,17 +4,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:deliveryapp/tracking.dart';
 
-class ResiPage extends StatefulWidget {
-  final String title;
-
-  const ResiPage({super.key, required this.title});
-
-  @override
-  State<ResiPage> createState() => _ResiPage();
-}
-
-class _ResiPage extends State<ResiPage> {
+class ResiPage extends StatelessWidget {
   final _selectedIndex = 1;
+  const ResiPage({super.key});
 
   @override
   Widget build(BuildContext context) {

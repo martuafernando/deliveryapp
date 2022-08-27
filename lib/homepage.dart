@@ -327,7 +327,7 @@ class _MyHomePage extends State<MyHomePage> {
                               TextButton(
                                 onPressed: (() => Navigator.push(context,
                                         MaterialPageRoute(builder: (context) {
-                                      return const ResiPage(title: 'Resi Page');
+                                      return const ResiPage();
                                     }))),
                                 child: Text(
                                   'See All',
@@ -466,7 +466,7 @@ class _MyHomePage extends State<MyHomePage> {
           if (index == 1)
             {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
-                return const ResiPage(title: 'Resi Page');
+                return const ResiPage();
               }))
             }
         },
@@ -494,25 +494,22 @@ class MyCustomFormState extends State<MyCustomForm> {
       key: _formKey,
       child: Stack(
         children: [
-          Flexible(
-            child: TextFormField(
-              decoration: InputDecoration(
-                  border: const OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(16.0)),
-                  ),
-                  filled: true,
-                  prefixIcon:
-                      const Icon(FontAwesomeIcons.truckFast, size: 18.0),
-                  fillColor: const Color.fromARGB(255, 52, 58, 67),
-                  hintText: 'Search Shipping Code',
-                  hintStyle: Theme.of(context).textTheme.bodyText1),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter some text';
-                }
-                return null;
-              },
-            ),
+          TextFormField(
+            decoration: InputDecoration(
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(16.0)),
+                ),
+                filled: true,
+                prefixIcon: const Icon(FontAwesomeIcons.truckFast, size: 18.0),
+                fillColor: const Color.fromARGB(255, 52, 58, 67),
+                hintText: 'Search Shipping Code',
+                hintStyle: Theme.of(context).textTheme.bodyText1),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Please enter some text';
+              }
+              return null;
+            },
           ),
           Positioned.fill(
               child: Align(
